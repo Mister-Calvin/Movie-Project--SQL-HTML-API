@@ -1,0 +1,6 @@
+colorama
+fuzzywuzzy
+python-Levenshtein
+requests
+SQLAlchemy
+python-dotenv
