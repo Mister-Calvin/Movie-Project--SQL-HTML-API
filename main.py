@@ -15,7 +15,6 @@ from utils.write__html import write_html
 from storage import movie_storage_sql
 from storage.movie_storage_sql import get_movies
 from api.Movie_API import search_movie_and_get_movies
-
 """
 Imports used in this project:
 
