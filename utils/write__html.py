@@ -40,10 +40,12 @@ def serialize_type():
 
 def write_html(output):
     """ writes the html to disk """
-
-    output_path = os.path.join("web", "movies.html")
-    with open(output_path, "w") as file:
-        file.write(serialize_type())
-        print("Website was generated successfully.")
+    try:
+        output_path = os.path.join("web", "movies.html")
+        with open(output_path, "w") as file:
+            file.write(serialize_type())
+            print("Website was generated successfully.")
+    except Exception as e:
+        print(f"Error while writing html file: {e}")
 
 
