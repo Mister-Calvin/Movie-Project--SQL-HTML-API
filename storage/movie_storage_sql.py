@@ -24,14 +24,17 @@ def create_movies_table():
         return connection.commit()
 
 
-
 def get_movies():
     """Retrieve all movies from the database."""
-    with engine.connect() as connection:
-        result = connection.execute(text("SELECT title, year, rating, poster FROM movies"))
-        movies = result.fetchall()
+    try:
+        with engine.connect() as connection:
+            result = connection.execute(text("SELECT title, year, rating, poster FROM movies"))
+            movies = result.fetchall()
 
-    return {row[0]: {"year": row[1], "rating": row[2], "poster": row[3]} for row in movies}
+        return {row[0]: {"year": row[1], "rating": row[2], "poster": row[3]} for row in movies}
+    except Exception as e:
+        print(f"Error getting movies: {e}")
+
 
 def add_movie(title, year, rating, poster):
     """Add a new movie to the database."""
@@ -43,6 +46,7 @@ def add_movie(title, year, rating, poster):
             print(f"Movie '{title}' added successfully.")
         except Exception as e:
             print(f"Error adding Movie: {e}")
+
 
 def delete_movie(title):
     """Delete a movie from the database."""
