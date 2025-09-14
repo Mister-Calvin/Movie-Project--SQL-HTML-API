@@ -50,7 +50,7 @@ def list_movies():
     """
     movies = get_movies()
     for title, info in movies.items():
-        print(fore_color_text(f"{title} ({info["year"]}): {info["rating"]}", Fore.MAGENTA))
+        print(fore_color_text(f"{title} ({info['year']}): {info['rating']}", Fore.MAGENTA))
 
 
 def add_movie():
@@ -66,10 +66,10 @@ def add_movie():
             print(fore_color_text("Movie already exists", Fore.RED))
             return
 
-        title = search_movie_and_get_movies(movie_input)["Title"]
-        year = search_movie_and_get_movies(movie_input)["Year"]
-        rating = search_movie_and_get_movies(movie_input)["imdbRating"]
-        poster = search_movie_and_get_movies(movie_input)["Poster"]
+        title = search_movie_and_get_movies(movie_input)['Title']
+        year = search_movie_and_get_movies(movie_input)['Year']
+        rating = search_movie_and_get_movies(movie_input)['imdbRating']
+        poster = search_movie_and_get_movies(movie_input)['Poster']
         movie_storage_sql.add_movie(title, year, rating, poster)
         print(f"Movie {movie_input} successfully added")
         return
@@ -126,13 +126,13 @@ def movies_sorted_by_year():
 
     sorted_movies = sorted(movies.items(), key=lambda x: clean_year(x[1].get("year", 0)), reverse=True)
     for title, info in sorted_movies:
-        print(f"{title} ({info.get('year', "Unknown")}): {info['rating']}")
+        print(f"{title} ({info.get('year', 'Unknown')}): {info['rating']}")
 
 
 def movies_sorted_by_rating():
     """print sorted movies by the parameter "rating" """
     movies = get_movies()
-    sorted_movies = sorted(movies.items(), key=lambda x: x[1]["rating"], reverse=True)
+    sorted_movies = sorted(movies.items(), key=lambda x: x[1]['rating'], reverse=True)
     for title, info in sorted_movies:
         print(f"{title} ({info['year']}): {info['rating']}")
 
@@ -142,7 +142,7 @@ def all_ratings():
     movies = get_movies()
     ratings = []
     for info in movies.values():
-        ratings.append(info["rating"])
+        ratings.append(info['rating'])
     return ratings
 
 
@@ -167,7 +167,7 @@ def best_and_worst():
     for title, info in movies.items():
         if info["rating"] == max_rating:
             print(f"Best Film: {title} ({info['year']}): {info['rating']}")
-        elif info["rating"] == min_rating:
+        elif info['rating'] == min_rating:
             print(f"Worst Film: {title} ({info['year']}): {info['rating']}")
 
 
@@ -315,11 +315,11 @@ def filter_movies():
 
     print("----Filtering movies----")
     for title, info in movies.items():
-        if min_rating is not None and info["rating"] < min_rating:
+        if min_rating is not None and info['rating'] < min_rating:
             continue
-        if start_year is not None and clean_year(info["year"]) < start_year:
+        if start_year is not None and clean_year(info['year']) < start_year:
             continue
-        if end_year is not None and clean_year(info["year"]) > end_year:
+        if end_year is not None and clean_year(info['year']) > end_year:
             continue
 
         print(fore_color_text(f"{title} ({info['year']}): {info['rating']}", Fore.GREEN))
