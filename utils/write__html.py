@@ -45,6 +45,9 @@ def write_html(output):
         with open(output_path, "w") as file:
             file.write(serialize_type())
             print("Website was generated successfully.")
+    except FileNotFoundError:
+        print("File not found.")
+
     except Exception as e:
         print(f"Error while writing html file: {e}")
 
