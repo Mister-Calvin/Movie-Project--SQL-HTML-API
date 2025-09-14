@@ -98,13 +98,6 @@ def delete_movie():
 def movies_sorted_by_year():
     """print sorted movies by the parameter "year" """
     movies = get_movies()
-
-    def clean_year(year_value):
-        """Take only the first 4 digits if year looks like '1997–' """
-        year_str = str(year_value)
-        if year_str[:4].isdigit():
-            return int(year_str[:4])
-
     sorted_movies = sorted(movies.items(), key=lambda x: clean_year(x[1].get("year", 0)), reverse=True)
     for title, info in sorted_movies:
         print(f"{title} ({info.get('year', 'Unknown')}): {info['rating']}")
