@@ -24,23 +24,26 @@ cd movie-project-term4
 ```bash
 pip install -r requirements.txt
 ```
-## Imports used in this project:
+## 📦 Imports & Dependencies
 
-- ## Standard Library:
-    - **random**: Selects a random movie from the database.
-    - **os**: Interacts with the operating system (e.g. for file paths).
-    - **statistics.median**: Calculates the median of all ratings.
+## Standard Library
+	•	random → Selects a random movie from the database.
+	•	os → File system handling (paths, env variables).
+	•	statistics.median → Calculate the median rating.
 
-- ## Third-Party Libraries:
-    - **colorama.Fore**: Enables colored terminal output.
-    - **fuzzywuzzy.process**: Enables fuzzy string matching for search suggestions.
-    - **requests**: Handles HTTP requests to the OMDb API.
-    - **dotenv**: Loads environment variables (e.g., API keys) from a .env file.
+## Third-Party Libraries
+	•	colorama.Fore → Colored terminal output.
+	•	fuzzywuzzy.process → Fuzzy string matching for search suggestions.
+	•	requests → HTTP requests to OMDb API.
+	•	dotenv → Load environment variables from .env.
+	•	sqlalchemy → SQL database connection and queries.
 
-- ## Local Modules:
-    - **utils.write__html**: Contains HTML generation functions.
-    - **storage.movie_storage_sql**: Manages SQL-based movie storage.
-    - **api.Movie_API**: Fetches movie data from the OMDb API.
+## Local Modules
+	•	utils.write__html → Generate HTML output.
+	•	utils.filter_movies → Handle filtering logic for years and ratings.
+	•	utils.Fore_color → Centralized colored text helper.
+	•	storage.movie_storage_sql → Manage SQLite movie storage.
+	•	api.Movie_API → Fetch movie data from OMDb API.
 
 3. **Create a `.env` file**
 - Inside the root directory, create a file called .env and add your OMDb API key:
@@ -52,18 +55,35 @@ pip install -r requirements.txt
 ```bash
 python main.py
 ```
+**Menu options allow you to**:
+
+	•	Add a movie via API
+	•	Delete a movie
+	•	Show statistics
+	•	Filter by year or rating
+	•	Pick a random movie
+	•	Export to HTML
 
 ## 📁 Project Structure
 ```bash
 project-name/
-├── main.py
-├── requirements.txt
-├── .env
-├── /data/            # Database or files
-├── /api/             # API integration
-├── /utils/           # Utility functions
-├── /storage/         # Database access
-├── /web/             # HTML/CSS files
+├── main.py                # Program entry point
+├── requirements.txt       # Dependencies
+├── .env                   # API key storage
+├── /data/                 # Database files
+│   └── movies.db
+├── /api/                  # API integration
+│   └── Movie_API.py
+├── /utils/                # Utility functions
+│   ├── write__html.py
+│   ├── filter_movies.py
+│   └── Fore_color.py
+├── /storage/              # Database logic
+│   └── movie_storage_sql.py
+├── /web/                  # Website export
+│   ├── movies.html
+│   ├── movies_template.html
+│   └── style.css
 └── README.md
 ```
 
