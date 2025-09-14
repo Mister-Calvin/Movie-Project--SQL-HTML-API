@@ -90,30 +90,6 @@ def delete_movie():
             print(fore_color_text("Movie does not exist", Fore.RED))
 
 
-def update_movie():
-    """update the rating of the movie"""
-    while True:
-        movie_input = input(fore_color_text("Enter movie name: ", Fore.YELLOW)).title()
-        movie_keys = check_keys_and_return_them(movie_input)
-
-        if movie_keys:
-            while True:
-                try:
-                    rating_input = float(input("Enter new movie rating 1-10: "))
-                    if rating_input < 1 or rating_input > 10:
-                        print("Invalid rating")
-                        continue
-                    break
-                except ValueError:
-                    print("Please enter ONLY numbers between 1-10!")
-
-            movie_storage_sql.update_movie(movie_keys, rating_input)
-            print(f"Movie {movie_keys} successfully updated")
-            return
-        else:
-            print(fore_color_text("Movie does not exist", Fore.RED))
-
-
 def movies_sorted_by_year():
     """print sorted movies by the parameter "year" """
     movies = get_movies()
