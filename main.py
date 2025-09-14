@@ -32,15 +32,16 @@ def fore_color_text(text, fore_color):
     return (f"{fore_color}{text}{Fore.RESET}")
 
 
-def check_keys_and_return_them(movie_input):
-    """ checks if input.lower is in dictionary or not
-    :param movie_input: the movie to check
-    :return: return keys from dictionary so the title or if movie not exist return None
-    """
+def find_movie_by_title(movie_input):
+    """Search for a movie title in the database.
+
+        :param movie_input: The title of the movie entered by the user (string).
+        :return: The correctly cased movie title from the database if found,
+                 otherwise None."""
     movies = get_movies()
-    for keys in movies:
-        if keys.lower() == movie_input.lower():
-            return keys
+    for movie_title in movies:
+        if movie_title.lower() == movie_input.lower():
+            return movie_title
     return None
 
 
@@ -61,7 +62,7 @@ def add_movie():
             print("Movie name cannot be empty")
             continue
 
-        movie_keys = check_keys_and_return_them(movie_input)
+        movie_keys = find_movie_by_title(movie_input)
         if movie_keys:
             print(fore_color_text("Movie already exists", Fore.RED))
             return
@@ -81,7 +82,7 @@ def delete_movie():
     """
     while True:
         movie_input = input(fore_color_text("Enter movie name: ", Fore.YELLOW)).title()
-        movie_keys = check_keys_and_return_them(movie_input)
+        movie_keys = find_movie_by_title(movie_input)
         if movie_keys:
             movie_storage_sql.delete_movie(movie_keys)
             print(f"Movie {movie_keys} successfully deleted")
