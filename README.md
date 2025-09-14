@@ -24,11 +24,29 @@ cd movie-project-term4
 ```bash
 pip install -r requirements.txt
 ```
+## Imports used in this project:
+
+- ## Standard Library:
+    - **random**: Selects a random movie from the database.
+    - **os**: Interacts with the operating system (e.g. for file paths).
+    - **statistics.median**: Calculates the median of all ratings.
+
+- ## Third-Party Libraries:
+    - **colorama.Fore**: Enables colored terminal output.
+    - **fuzzywuzzy.process**: Enables fuzzy string matching for search suggestions.
+    - **requests**: Handles HTTP requests to the OMDb API.
+    - **dotenv**: Loads environment variables (e.g., API keys) from a .env file.
+
+- ## Local Modules:
+    - **utils.write__html**: Contains HTML generation functions.
+    - **storage.movie_storage_sql**: Manages SQL-based movie storage.
+    - **api.Movie_API**: Fetches movie data from the OMDb API.
 
 3. **Create a `.env` file**
 - Inside the root directory, create a file called .env and add your OMDb API key:
 - Used API: https://www.omdbapi.com/
 - API_KEY=your_omdb_api_key_here
+
 
 ## ▶️ Usage
 ```bash

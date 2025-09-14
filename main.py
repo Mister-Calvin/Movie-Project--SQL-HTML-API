@@ -15,25 +15,6 @@ from utils.write__html import write_html
 from storage import movie_storage_sql
 from storage.movie_storage_sql import get_movies
 from api.Movie_API import search_movie_and_get_movies
-"""
-Imports used in this project:
-
-- Standard Library:
-    - random: Selects a random movie from the database.
-    - os: Interacts with the operating system (e.g. for file paths).
-    - statistics.median: Calculates the median of all ratings.
-
-- Third-Party Libraries:
-    - colorama.Fore: Enables colored terminal output.
-    - fuzzywuzzy.process: Enables fuzzy string matching for search suggestions.
-    - requests: Handles HTTP requests to the OMDb API.
-    - dotenv: Loads environment variables (e.g., API keys) from a .env file.
-
-- Local Modules:
-    - utils.write__html: Contains HTML generation functions.
-    - storage.movie_storage_sql: Manages SQL-based movie storage.
-    - api.Movie_API: Fetches movie data from the OMDb API.
-"""
 
 
 class InvalidRangeError(Exception):
