@@ -4,7 +4,6 @@ import os
 from statistics import median
 
 # === Third-Party Libraries ===
-from colorama import Fore
 from fuzzywuzzy import process
 import requests
 from dotenv import load_dotenv
@@ -16,6 +15,7 @@ from storage import movie_storage_sql
 from storage.movie_storage_sql import get_movies
 from api.Movie_API import search_movie_and_get_movies
 from utils.filter_movies import clean_year, min_rating, start_year, end_year
+from utils.Fore_color import fore_color_text, Fore
 
 
 class InvalidRangeError(Exception):
@@ -23,14 +23,6 @@ class InvalidRangeError(Exception):
     not in range 0-10"""
     pass
 
-
-def fore_color_text(text, fore_color):
-    """
-    :param text: the text to be colored
-    :param fore_color: the color of the text
-    :return: reset the original color
-    """
-    return (f"{fore_color}{text}{Fore.RESET}")
 
 
 def find_movie_by_title(movie_input):
@@ -265,18 +257,7 @@ def main():
         except FileNotFoundError:
             print("File not found.")
             break
-        except KeyError:
-            print("Key not found.")
-            user_input = input(fore_color_text("\nPress Enter to continue...", Fore.YELLOW))
-        except requests.exceptions.ConnectionError:
-            print("No connection to the API (ConnectionError).")
-            user_input = input(fore_color_text("\nPress Enter to continue...", Fore.YELLOW))
-        except requests.exceptions.Timeout:
-            print("API request took too long (Timeout).")
-            user_input = input(fore_color_text("\nPress Enter to continue...", Fore.YELLOW))
-        except requests.exceptions.HTTPError as e:
-            print(f"HTTP-Error: {e.response.status_code}")
-            user_input = input(fore_color_text("\nPress Enter to continue...", Fore.YELLOW))
+        user_input = input(fore_color_text("\nPress Enter to continue...", Fore.YELLOW))
 
 
 if __name__ == "__main__":
