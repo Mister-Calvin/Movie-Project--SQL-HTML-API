@@ -254,9 +254,10 @@ def main():
                 print(fore_color_text("Bye!", Fore.YELLOW))
                 break
             user_input = input(fore_color_text("\nPress Enter to continue...", Fore.YELLOW))
-        except FileNotFoundError:
-            print("File not found.")
-            break
+        except ValueError:
+            print("You did not enter a valid number.")
+        except InvalidRangeError:
+            print("You did not enter a number between the range.")
         user_input = input(fore_color_text("\nPress Enter to continue...", Fore.YELLOW))
 
 
