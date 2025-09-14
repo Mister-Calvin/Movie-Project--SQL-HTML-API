@@ -66,14 +66,17 @@ def add_movie():
         if movie_keys:
             print(fore_color_text("Movie already exists", Fore.RED))
             return
-
-        title = search_movie_and_get_movies(movie_input)['Title']
-        year = search_movie_and_get_movies(movie_input)['Year']
-        rating = search_movie_and_get_movies(movie_input)['imdbRating']
-        poster = search_movie_and_get_movies(movie_input)['Poster']
-        movie_storage_sql.add_movie(title, year, rating, poster)
-        print(f"Movie {movie_input} successfully added")
-        return
+        movie_data = search_movie_and_get_movies(movie_input)
+        if movie_data:
+            title = movie_data['Title']
+            year = movie_data['Year']
+            rating = movie_data['imdbRating']
+            poster = movie_data['Poster']
+            movie_storage_sql.add_movie(title, year, rating, poster)
+            print(f"Movie {movie_input} successfully added")
+            return
+        else:
+            print(f"Movie {movie_input} was not found in API")
 
 
 def delete_movie():
