@@ -139,8 +139,9 @@ def find_median():
 def best_and_worst():
     """find and the best and worst rating of the movies and print the title and info"""
     movies = get_movies()
-    max_rating = max(all_ratings())
-    min_rating = min(all_ratings())
+    rating = all_ratings()
+    max_rating = max(rating)
+    min_rating = min(rating)
     for title, info in movies.items():
         if info["rating"] == max_rating:
             print(f"Best Film: {title} ({info['year']}): {info['rating']}")
