@@ -45,6 +45,7 @@ def add_movie(title, year, rating, poster):
             connection.commit()
             print(f"Movie '{title}' added successfully.")
         except Exception as e:
+            connection.rollback()
             print(f"Error adding Movie: {e}")
 
 
@@ -57,6 +58,7 @@ def delete_movie(title):
             connection.commit()
             print(f"Movie '{title}' deleted successfully.")
         except Exception as e:
+            connection.rollback()
             print(f"Error delete Movie: {e}")
 
 
@@ -69,4 +71,5 @@ def update_movie(title, rating):
             connection.commit()
             print(f"Movie '{title}' updated successfully.")
         except Exception as e:
+            connection.rollback()
             print(f"Error update Movie: {e}")
