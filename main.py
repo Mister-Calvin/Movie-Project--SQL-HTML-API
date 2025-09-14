@@ -55,7 +55,6 @@ def list_movies():
 
 def add_movie():
     """ add a new movie to the database"""
-    movies = get_movies()
     while True:
         movie_input = input(fore_color_text("Enter movie name: ", Fore.YELLOW)).title()
         if not movie_input:
@@ -80,12 +79,10 @@ def delete_movie():
     """
     :delete a existing movie from the database
     """
-    movies = get_movies()
     while True:
         movie_input = input(fore_color_text("Enter movie name: ", Fore.YELLOW)).title()
         movie_keys = check_keys_and_return_them(movie_input)
         if movie_keys:
-            del movies[movie_keys]
             movie_storage_sql.delete_movie(movie_keys)
             print(f"Movie {movie_keys} successfully deleted")
             return
@@ -95,7 +92,6 @@ def delete_movie():
 
 def update_movie():
     """update the rating of the movie"""
-    movies = get_movies()
     while True:
         movie_input = input(fore_color_text("Enter movie name: ", Fore.YELLOW)).title()
         movie_keys = check_keys_and_return_them(movie_input)
@@ -152,14 +148,12 @@ def all_ratings():
 
 def average_rating():
     """print the average rating of the movies"""
-    movies = get_movies()
     ratings = all_ratings()
     print(f"Average rating: {sum(ratings) / len(ratings):.2f}")
 
 
 def find_median():
     """find and print the median rating of the movies"""
-    movies = get_movies()
     ratings = all_ratings()
     movie_median = median(ratings)
     print(f"Movie median rating: {movie_median:.2f}")
@@ -186,7 +180,6 @@ def stats():
 
 def menu():
     """the choose menu with inbuilt functions"""
-    movies = get_movies()
     while True:
         try:
             choose_menu = int(input(fore_color_text("Menu: "
