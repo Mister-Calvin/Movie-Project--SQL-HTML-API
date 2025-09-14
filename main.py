@@ -15,6 +15,7 @@ from utils.write__html import write_html
 from storage import movie_storage_sql
 from storage.movie_storage_sql import get_movies
 from api.Movie_API import search_movie_and_get_movies
+from utils.filter_movies import clean_year, min_rating, start_year, end_year
 
 
 class InvalidRangeError(Exception):
@@ -76,7 +77,7 @@ def add_movie():
             print(f"Movie {movie_input} successfully added")
             return
         else:
-            print(f"Movie {movie_input} was not found in API")
+            print(f"Movie {movie_input} was not found API")
 
 
 def delete_movie():
@@ -242,65 +243,17 @@ def search_movie():
 def filter_movies():
     """ print the movies by filtering out movies """
     movies = get_movies()
-
-    def clean_year(year_value):
-        """Take only the first 4 digits if year looks like '1997–' """
-        year_str = str(year_value)
-        if year_str[:4].isdigit():
-            return int(year_str[:4])
-
-    # Min Rating
-    while True:
-        min_rating = input("Enter min rating (leave blank if you want None): ")
-        if not min_rating:
-            min_rating = None
-            break
-        try:
-            min_rating = float(min_rating)
-            if min_rating < 0 or min_rating > 10:  # keine negativen Ratings
-                print("Rating cannot be negative or greater than 10.")
-                continue
-            break
-        except ValueError:
-            print("Please enter a valid number for rating.")
-
-    # Start Year
-    while True:
-        start_year = input("Enter start year (leave blank if you want None): ")
-        if not start_year:
-            start_year = None
-            break
-        try:
-            start_year = int(start_year)
-            if start_year < 0:  # keine negativen Jahreszahlen
-                print("Year cannot be negative.")
-                continue
-            break
-        except ValueError:
-            print("Please enter a valid year.")
-
-    # End Year
-    while True:
-        end_year = input("Enter end year (leave blank if you want None): ")
-        if not end_year:
-            end_year = None
-            break
-        try:
-            end_year = int(end_year)
-            if end_year < 0:
-                print("Year cannot be negative.")
-                continue
-            break
-        except ValueError:
-            print("Please enter a valid year.")
+    min_rating_value = min_rating()
+    start_year_value = start_year()
+    end_year_value = end_year()
 
     print("----Filtering movies----")
     for title, info in movies.items():
-        if min_rating is not None and info['rating'] < min_rating:
+        if min_rating_value is not None and info['rating'] < min_rating_value:
             continue
-        if start_year is not None and clean_year(info['year']) < start_year:
+        if start_year_value is not None and clean_year(info['year']) < start_year_value:
             continue
-        if end_year is not None and clean_year(info['year']) > end_year:
+        if end_year_value is not None and clean_year(info['year']) > end_year_value:
             continue
 
         print(fore_color_text(f"{title} ({info['year']}): {info['rating']}", Fore.GREEN))
